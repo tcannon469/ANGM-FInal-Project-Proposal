@@ -24,10 +24,13 @@ def build_level(level_map):
     return tiles, player_start_pos
 
 
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     pygame.display.set_caption("Final Projet - Thomas Cannon")
+
+    tiles,playerPos = build_level(LEVEL_MAPS[0])
 
     # Generate a random color
     random_color = (
@@ -42,11 +45,14 @@ def main():
 
     # Main loop to keep the window open
     running = True
-    dt = clock.tick(FPS) / 1000  # Amount of seconds between each loop
+    dt = clock.tick(FPS)  # Amount of seconds between each loop
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+        for tile in tiles:
+            pygame.draw.rect(screen, (255, 255, 255), tile)
+        pygame.display.flip()
 
     pygame.quit()
     sys.exit()    
