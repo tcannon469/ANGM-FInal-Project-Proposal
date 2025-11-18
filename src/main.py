@@ -1,12 +1,33 @@
 import random
 import pygame
 import sys
+# Global constants and settings
+import level_maps
+
+WIDTH, HEIGHT = 800, 600
+TILESIZE = 32
+FPS = 60
+
+clock = pygame.time.Clock()
+
+def build_level(level_map):
+    # Function to build the level based on the level_map found in file level_maps.py
+    tiles = []
+    for row_index, row in enumerate(level_map):
+        for col_index, tile in enumerate(row):
+            x = col_index * TILESIZE
+            y = row_index * TILESIZE
+            if tile == 'X':
+                tiles.append(pygame.Rect(x, y, TILESIZE, TILESIZE))
+            elif tile == 'P':
+                player_start_pos = (x, y)
+    return tiles, player_start_pos
 
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
-    pygame.display.set_caption("Random Color Screen")
+    pygame.display.set_caption("Final Projet - Thomas Cannon")
 
     # Generate a random color
     random_color = (
@@ -21,6 +42,7 @@ def main():
 
     # Main loop to keep the window open
     running = True
+    dt = clock.tick(FPS) / 1000  # Amount of seconds between each loop
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
