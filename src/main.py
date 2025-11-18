@@ -2,7 +2,7 @@ import random
 import pygame
 import sys
 # Global constants and settings
-import level_maps
+import levelmaps
 
 WIDTH, HEIGHT = 800, 600
 TILESIZE = 32
@@ -30,9 +30,8 @@ def main():
     screen = pygame.display.set_mode((800, 600))
     pygame.display.set_caption("Final Projet - Thomas Cannon")
 
-    tiles,playerPos = build_level(LEVEL_MAPS[0])
-
-    # Generate a random color
+    tiles,playerPos = build_level(LEVEL_MAPS.LEVEL_MAP0)
+                                      # Generate a random color
     random_color = (
         random.randint(0, 255),
         random.randint(0, 255),
