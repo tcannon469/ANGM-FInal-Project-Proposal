@@ -77,6 +77,19 @@ Open a terminal or command prompt:
 
 ```sh
 pip install pygame
+
+## 🔧 Installation
+
+### **1. Install Python**
+This game works on **Python 3.10+**.
+
+Download: https://www.python.org/downloads/
+
+### **2. Install Pygame**
+Open a terminal or command prompt:
+
+```sh
+pip install pygame
 Run the game
 
 Inside the src folder:
