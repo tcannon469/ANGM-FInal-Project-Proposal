@@ -6,9 +6,13 @@ from levelmaps import LEVEL_MAPS
 #                        Global constants and settings
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 WIDTH, HEIGHT = 800, 600
-TILESIZE = 32
+TILE_SIZE = 32
 FPS = 60
-
+# Colors
+SKY_BLUE = (135, 206, 235)
+GREEN = (0, 200, 0)
+BROWN = (139, 69, 19)
+RED = (200, 50, 50)
 
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 # Function to build the level based on the level_map found in file level_maps.py
@@ -19,10 +23,10 @@ def build_level(level_map):
     tiles = []
     for row_index, row in enumerate(level_map):
         for col_index, tile in enumerate(row):
-            x = col_index * TILESIZE
-            y = row_index * TILESIZE
+            x = col_index * TILE_SIZE
+            y = row_index * TILE_SIZE
             if tile == 'X':
-                tiles.append(pygame.Rect(x, y, TILESIZE, TILESIZE))
+                tiles.append(pygame.Rect(x, y, TILE_SIZE, TILE_SIZE))
             elif tile == 'P':
                 player_start_pos = (x, y)
     return tiles, player_start_pos
@@ -33,7 +37,7 @@ def build_level(level_map):
 class Player:
     #   Initialize the player at a given position
     def __init__(self, position):
-        self.rect = pygame.Rect(position[0], position[1], TILESIZE, TILESIZE)
+        self.rect = pygame.Rect(position[0], position[1], TILE_SIZE, TILE_SIZE)
         self.color = (0, 255, 0)  # Green color for the player
         self.vel_x = 0
         self.vel_y = 0  
@@ -137,7 +141,8 @@ def main():
     # Fill the screen with the random color
     screen.fill(random_color)
     #pygame.display.flip()
-
+    player = Player((100,100))
+    level_width_pixels = len(LEVEL_MAPS[0]) * TILE_SIZE
     # Main loop to keep the window open
     running = True
     dt = clock.tick(FPS)  # Amount of seconds between each loop
@@ -150,8 +155,7 @@ def main():
                 running = False
         # Update 
         player.update(tiles)
-        #camera_x = get_camera_x(player, level_width_pixels)
-        camera_x = get_camera_x(player, len(LEVEL_MAPS[0][0]) * TILESIZE)
+        camera_x = get_camera_x(player, level_width_pixels)
         
         # Draw 
         screen.fill(SKY_BLUE)
