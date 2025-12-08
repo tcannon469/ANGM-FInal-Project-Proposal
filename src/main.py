@@ -36,16 +36,19 @@ def build_level(level_map):
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 class Player:
     #   Initialize the player at a given position
-    def __init__(self, position):
-        self.rect = pygame.Rect(position[0], position[1], TILE_SIZE, TILE_SIZE)
-        self.color = (0, 255, 0)  # Green color for the player
+    def __init__(self, x,y):
+        self.rect = pygame.Rect(x, y, TILE_SIZE, TILE_SIZE*1.5)
+        self.color = RED  
+
         self.vel_x = 0
         self.vel_y = 0  
-        self.speed = 5
-        self.jump_strength = 10
+        
+        self.speed = 4
+        self.jump_power = 12
         self.gravity = 0.5
-        self.on_ground = False
-        self.max_fall_speed = 10
+        self.max_fall_speed = 15
+
+        self.on_ground = True
 
     #   Response to keyboard input for movement and jumping
     def handle_input(self):
@@ -59,21 +62,21 @@ class Player:
             self.vel_x = self.speed
 
         #   Handle jumping maybe consider the negative effect of gravity
-        if (keys[pygame.K_UP] or keys[pygame.K_w] or keys[pygame.K_SPACE]) and self.on_ground:
-            self.vel_y = -self.jump_strength
+        if (keys[pygame.K_SPACE] or keys[pygame.K_UP] or keys[pygame.K_w]) and self.on_ground:
+            self.vel_y = -self.jump_power
             self.on_ground = False
             #   consider the negative effect of gravity
   
-   # Apply gravity to the player when not on the ground 
+    # Apply gravity to the player when not on the ground 
     def apply_gravity(self):
         # increase downward velocity due to gravity
         self.vel_y += self.gravity  
         if self.vel_y > self.max_fall_speed:
             self.vel_y = self.max_fall_speed
 
-    #   Check for collisions and adjust position accordingly
+    #   Adjust position and check for collisions 
     def move_and_collide(self, tiles):
-        # Horizontal movement
+        # --- Horizontal movement ---
         self.rect.x += self.vel_x
         for tile in tiles:
             if self.rect.colliderect(tile):
@@ -82,7 +85,7 @@ class Player:
                 elif self.vel_x < 0:  # moving left
                     self.rect.left = tile.right
 
-        # Vertical movement
+        # --- Vertical movement ---
         self.rect.y += self.vel_y
         self.on_ground = False
         for tile in tiles:
@@ -94,11 +97,9 @@ class Player:
                 elif self.vel_y < 0:  # jumping upward
                     self.rect.top = tile.bottom
                     self.vel_y = 0
-                    
 
 
-
-#   Update the player's position based on velocity and apply gravity
+    #   Update the player's position based on velocity and apply gravity
     def update(self, tiles):
         self. handle_input()
         self.apply_gravity()
@@ -108,7 +109,7 @@ class Player:
     def draw(self, surface, camera_x):
         draw_rect = self.rect.copy()
         draw_rect.x -= camera_x
-        pygame.draw.rect(surface, self.color, self.rect)
+        pygame.draw.rect(surface, self.color, draw_rect)
 
 
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -128,25 +129,29 @@ def main():
     clock = pygame.time.Clock()
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
-    pygame.display.set_caption("Final Projet - Thomas Cannon")
+    pygame.display.set_caption("Final Projet - Thomas Cannon  -  My Mini Mario")
 
     tiles,playerPos = build_level(LEVEL_MAPS[0])
                                       # Generate a random color
-    random_color = (
-        random.randint(0, 255),
-        random.randint(0, 255),
-        random.randint(0, 255)
-    )
+    #random_color = (
+     #   random.randint(0, 255),
+      #  random.randint(0, 255),
+       # random.randint(0, 255)
+    #)
 
     # Fill the screen with the random color
-    screen.fill(random_color)
-    #pygame.display.flip()
-    player = Player((100,100))
+    #screen.fill(random_color)
+   
+    
+    px, py = playerPos
+    player = Player(px, py)
     level_width_pixels = len(LEVEL_MAPS[0]) * TILE_SIZE
-    # Main loop to keep the window open
     running = True
-    dt = clock.tick(FPS)  # Amount of seconds between each loop
+   # dt = clock.tick(FPS)  # Amount of seconds between each loop
+   
+    # Main loop to keep the window open
     while running:
+        dt = clock.tick(FPS)  # Amount of seconds between each loop
         # Event handling
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -162,7 +167,6 @@ def main():
 
         # Draw tiles
         for tile in tiles:
-            #pygame.draw.rect(screen, (255, 255, 255), tile)
             # draw relative to camera
             draw_rect = tile.copy()
             draw_rect.x -= camera_x
