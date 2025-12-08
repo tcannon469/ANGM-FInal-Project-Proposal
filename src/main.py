@@ -132,23 +132,12 @@ def main():
     pygame.display.set_caption("Final Projet - Thomas Cannon  -  My Mini Mario")
 
     tiles,playerPos = build_level(LEVEL_MAPS[0])
-                                      # Generate a random color
-    #random_color = (
-     #   random.randint(0, 255),
-      #  random.randint(0, 255),
-       # random.randint(0, 255)
-    #)
-
-    # Fill the screen with the random color
-    #screen.fill(random_color)
-   
-    
+       
     px, py = playerPos
     player = Player(px, py)
     level_width_pixels = len(LEVEL_MAPS[0]) * TILE_SIZE
     running = True
-   # dt = clock.tick(FPS)  # Amount of seconds between each loop
-   
+  
     # Main loop to keep the window open
     while running:
         dt = clock.tick(FPS)  # Amount of seconds between each loop
