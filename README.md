@@ -1,13 +1,81 @@
-## 🔧 Installation
-1. Install Python  
-Download: https://www.python.org/downloads/
+# 🕹️ Mini Python Platformer  
+*A simple 2D platformer built with Python + Pygame*
 
-2. Install Pygame  
-```bash
-pip install pygame
+![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/python-3.11-blue)
+![Pygame](https://img.shields.io/badge/pygame-2.5-orange)
+
+---
+
+## 📌 Overview
+
+This project is a **fully animated mini side-scrolling platformer** made using **Python** and **Pygame**.  
+It includes:
+
+- Animated player (idle, run, jump, fall)
+- Grass/dirt auto-tiling terrain
+- Multi-level support
+- Collision physics
+- Smooth side-scrolling camera
+- “You Win” end screen
+- Clean, expandable code structure
+
+This project is great for beginners learning game development with Pygame or for experimenting with your own assets and levels.
+
+---
+
+## 🎮 Features
+
+- ✔️ Smooth player movement + jump physics  
+- ✔️ Sprite animation system  
+- ✔️ Automatic tile selection (grass, dirt, edges, middle)  
+- ✔️ Level maps defined in simple text format  
+- ✔️ Camera following the player  
+- ✔️ Easily expandable for enemies, items, checkpoints and more  
+
+---
+
+## 📂 Folder Structure
+
+```text
+project-root/
+│
+├── assets/
+│   ├── player/
+│   │   ├── idle.png
+│   │   ├── run1.png
+│   │   ├── run2.png
+│   │   ├── jump.png
+│   │   ├── fall.png
+│   │   └── player_cheer1.png
+│   │
+│   └── tiles/
+│       ├── grass_single.png
+│       ├── grass_block_left.png
+│       ├── grass_block_middle.png
+│       ├── grass_block_right.png
+│       └── dirt.png
+│
+├── src/
+│   ├── main.py
+│   ├── levelmaps.py
+│   └── (your other modules)
+│
+└── README.md
+
 ```
+# 🔧 Installation
 
-3. Run the Game  
+##1. Install Python
+
+Make sure you have Python 3.10+ installed.
+
+Download from: https://www.python.org/downloads/
+
+##2. Install Pygame
+
+In a terminal (or command prompt):
+##3. Run the Game  
 From inside the `src` folder:
 ```bash
 python main.py
@@ -49,11 +117,12 @@ fall.png
 player_cheer1.png (optional)
 ```
 
-States:  
-idle  
-run  
-jump  
-fall  
+States: 
+The player has 4 animation states:
+ - idle  
+ - run  
+ - jump  
+ - fall  
 
 The game loads, scales, and flips these automatically.
 
@@ -68,14 +137,21 @@ dirt.png
 ```
 
 Tile logic:  
-If no tile above → draw grass  
-Else → draw dirt  
+Each tile in the map is a 32×32 block (TILE_SIZE = 32).
+For each 'X' in the level:
+- If no tile above → draw grass  
+- Else → draw dirt  
 
 Grass type depends on neighbors:  
-No neighbors → grass_single  
-Left only → grass_block_right  
-Right only → grass_block_left  
-Both → grass_block_middle  
+```
+| Left neighbor | Right neighbor | Tile used          |
+| ------------- | -------------- | ------------------ |
+| none          | none           | grass_single       |
+| none          | yes            | grass_block_left   |
+| yes           | yes            | grass_block_middle |
+| yes           | none           | grass_block_right  |
+```
+This produces natural-looking platforms without manually placing edge tiles.
 
 ## 🧠 Camera System
 Camera centers on the player:
@@ -89,6 +165,8 @@ All objects are drawn with:
 ```python
 draw_x = tile.x - camera_x
 ```
+The x-position of tiles and player is shifted by -camera_x
+This makes the world appear to scroll while the player moves
 
 ## 🏆 Final Victory Screen
 After the final level, the game shows:
