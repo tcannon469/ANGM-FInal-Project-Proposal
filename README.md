@@ -47,7 +47,7 @@ project-root/
 │   │   ├── run2.png
 │   │   ├── jump.png
 │   │   ├── fall.png
-│   │   └── player_cheer1.png
+│   │   └── end_screen.png
 │   │
 │   └── tiles/
 │       ├── grass_single.png
