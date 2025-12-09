@@ -64,18 +64,22 @@ project-root/
 └── README.md
 
 ```
-# 🔧 Installation
-
-##1. Install Python
+## 🔧 Installation
+ 
+### 1. Install Python
 
 Make sure you have Python 3.10+ installed.
 
 Download from: https://www.python.org/downloads/
 
-##2. Install Pygame
+### 2. Install Pygame
 
 In a terminal (or command prompt):
-##3. Run the Game  
+```
+pip install pygame
+```
+
+### 3. Run the Game  
 From inside the `src` folder:
 ```bash
 python main.py
@@ -107,7 +111,13 @@ P → Player start
 . → Empty space
 
 ## 🎨 Player Animations
+Player graphics obtained from : 
+    **Kenney Platformer Art Characters** — https://kenney.nl/assets  
+     Licensed under **CC0 (Public Domain)** 
+     
 Player animation frames must exist in `assets/player/`:
+  
+
 ```text
 idle.png
 run1.png
@@ -127,7 +137,12 @@ The player has 4 animation states:
 The game loads, scales, and flips these automatically.
 
 ## 🌿 Tile System
+Tile graphics obtained from:  
+   **Kenney Platformer Art Extended TileSet** — https://kenney.nl/assets  
+   Licensed under **CC0 (Public Domain)** 
+
 Tile artwork loaded from `assets/tiles/`:
+
 ```text
 grass_single.png
 grass_block_left.png
