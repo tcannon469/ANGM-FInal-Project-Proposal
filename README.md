@@ -86,10 +86,10 @@ python main.py
 ```
 
 ## Controls
-Left / A = Move left  
-Right / D = Move right  
-Up / W / Space = Jump  
-Esc = Quit
+- Left / A = Move left  
+- Right / D = Move right  
+- Up / W / Space = Jump  
+- Esc = Quit
 
 ## Level Maps (levelmaps.py)
 Levels are defined as lists of text rows for easy customization:
@@ -106,15 +106,18 @@ LEVEL_MAPS = [
 ```
 
 Legend:
-X = Solid block
-P = Player starting point
-. = Empty space
+
+ -X = Solid block
+- P = Player starting point
+- . = Empty space
 
 ## Player Animations
-All player graphics were obtained from:
-    **Kenney Platformer Art Characters** — https://kenney.nl/assets
-     Licensed under **CC0 (Public Domain)**
-     
+All player graphics were obtained from Kenney Platformer Art Characters
+
+Link to source: https://kenney.nl/assets
+
+Licensed under CC0/Public Domain laws
+
 All player animation frames must exist in `assets/player/`.
 
 ```text
@@ -136,9 +139,11 @@ The four animation states that exist in the game are:
 The game loads, scales, and flips these automatically.
 
 ## Tile System
-Tile graphics obtained from:
-   **Kenney Platformer Art Extended TileSet** — https://kenney.nl/assets
-   Licensed under **CC0 (Public Domain)**
+Tile graphics obtained from Kenney Platformer Art Extended TileSet
+
+Link to source: https://kenney.nl/assets
+
+Licensed under CC0/Public Domain laws
 
 All tile artwork must be loaded in `assets/tiles/`.
 
@@ -191,7 +196,7 @@ Once completing the allotted levels, the game will:
 - Show a sky background 
 - Show the ground platform
 - Show "player_cheer1.png", scaled up for clarity
-- Celebratory text saying "YOU WIN"
+- Show celebratory text saying "YOU WIN"
 
 The program will then wait for a key to be pressed before closing
 
